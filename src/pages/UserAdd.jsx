@@ -1,6 +1,6 @@
-import Add from '../components/Add'
+import EditUser from '../components/EditUser'
 import {connect} from 'react-redux'
-import {requestAddUser} from '../store/actions.js'
+import { requestAddUser, requestEditUser} from '../store/actions.js'
 
 const mapStateToProps =(state)=>{
     return {
@@ -10,8 +10,11 @@ const mapStateToProps =(state)=>{
 
 const mapDispatchToProps = (dispatch)=>{
     return {
-        addUser: (name,age,gender)=>{
-            dispatch(requestAddUser(name,age,gender))
+        addUser: (name,age,gender,subreddit)=>{
+            dispatch(requestAddUser(name,age,gender,subreddit))
+        },
+        editUser: (name,age,gender,id,subreddit)=>{
+            dispatch(requestEditUser(name, age, gender, id, subreddit))
         }
     }
 }
@@ -19,6 +22,6 @@ const mapDispatchToProps = (dispatch)=>{
 const UserAdd = connect(
     mapStateToProps,
     mapDispatchToProps
-)(Add)
+)(EditUser)
 
 export default UserAdd

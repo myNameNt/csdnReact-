@@ -1,13 +1,15 @@
 import {ADD_USER,REQUEST_POSTS,RECEIVE_POSTS,SELECT_SUBREDDIT,INVALIDATE_SUBREDDIT,DEL_USER} from './actionTypes'
+import {push} from 'react-router-redux' // 需要在action 里面做路由跳转 需要引入该 reducer ！！！
 import axios from '../util/request'
 
-export function addUser(name,age,gender,id){
+export function addUser(name,age,gender,id,subreddit){
     return {
         type: ADD_USER,
         name,
         age,
         gender,
-        id
+        id,
+        subreddit
     }
 }
 
@@ -58,7 +60,7 @@ export function fetchPosts(subreddit){
             method:'get',
             url:`/${subreddit}`,
         }).then(res=>{
-            
+            console.log(res,'list---')
             dispatch(receivePosts(subreddit,res))
         })
         .catch(err=>{
@@ -67,7 +69,7 @@ export function fetchPosts(subreddit){
     }
 }
 
-export function requestAddUser(name,age,gender){
+export function requestAddUser(name,age,gender,subreddit){
     return function(dispatch){
         axios({
             url:'/user',
@@ -78,12 +80,30 @@ export function requestAddUser(name,age,gender){
             if(res.id){
                 console.log('添加成功呢')
                 const {name,age,gender,id} = res
-                dispatch(addUser(name,age,gender,id))
+                dispatch(addUser(name,age,gender,id,subreddit))
+                dispatch(push('/userlist'))
             } else {
                 alert('添加失败')
             }
         }).catch(err=>{
+             debugger
             console.log(err)
+        })
+    }
+}
+
+export function requestEditUser(name, age, gender, id,subreddit) {
+    return function(dispatch){
+        axios({
+            url: `/${id}`,
+            method: 'put',
+            data: {name, age, gender}
+        }).then(res=>res.data)
+        .then(res=>{
+            console.log('修改成功！')
+            dispatch(push('/userlist'))
+        }).catch(err=>{
+            alert('修改失败')
         })
     }
 }

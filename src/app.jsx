@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-    BrowserRouter as Router,
+    Router,
     Route,
     Switch
 } from 'react-router-dom'
@@ -10,8 +10,9 @@ import UserList from '../src/pages/UserList'
 class App extends React.Component{
 
     render(){
+        const {history} = this.props
         return(
-            <Router>
+            <Router history={history}>
                 <div>
                     <h3>欢迎来到路由空间</h3>
                     <Switch>

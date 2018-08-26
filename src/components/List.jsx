@@ -9,15 +9,44 @@ class List extends React.Component{
     componentDidMount(){
         this.props.getList('user')
     }
-    handleEdit(ev){
-        this.props.handleEdit()
+    handleEdit(id){
+        console.log(this.props,'list---')
+        this.props.history.push({ pathname: '/useradd',state:{id}})
+        // this.props.handleEdit(id,'user')
     }
     handleDel(user){
-            this.props.requestHandleDel(user,'user')
+        this.props.requestHandleDel(user,'user')
+    }
+    onShowView(){
+        console.log(this.props,'---show')
+        let { items, isFetching} = this.props.userList
+
+        if (isFetching){
+            return (
+                <tr>
+                    <td>loading。。。。。。。</td>
+                </tr>
+            )
+        } else {
+            return items.map((item)=>
+                (
+                    <tr key={item.id}>
+                        <td>{item.id}</td>
+                        <td>{item.name}</td>
+                        <td>{item.gender}</td>
+                        <td>{item.age}</td>
+                        <td>
+                            <a href="javascript:;" onClick={(ev) => { this.handleEdit(item.id)}} >编辑</a>
+                            &nbsp;
+                            <a href="javascript:;" onClick={(ev) => { this.handleDel(item)}}>删除</a>
+                        </td>
+                    </tr>
+                )
+            )
+        }
+
     }
     render(){
-        const {userList:{items}} = this.props
-        console.log(items)
         return(
             <HomeLayout title='用户列表'>
                 <table>
@@ -30,21 +59,7 @@ class List extends React.Component{
                         </tr>
                     </thead>
                     <tbody>
-                        {items.map(item=>{
-                            return (
-                                <tr key={item.id}>
-                                    <td>{item.id}</td>
-                                    <td>{item.name}</td>
-                                    <td>{item.gender}</td>
-                                    <td>{item.age}</td>
-                                    <td>
-                                        <a href="javascript:;" onClick={(ev)=>{this.handleEdit(item)}} >编辑</a>
-                                        &nbsp;
-                                        <a href="javascript:;" onClick={(ev)=>{this.handleDel(item)}}>删除</a>
-                                    </td>
-                                </tr>
-                            )
-                        })}
+                        {this.onShowView()}
                     </tbody>
                 </table>
             </HomeLayout>

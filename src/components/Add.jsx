@@ -54,7 +54,7 @@ class Add extends React.Component{
             return
         }
         console.log(this.props)
-        this.props.addUser(name.value,age.value,gender.value)
+        this.props.addUser(name.value,age.value,gender.value,'user')
     }
     render(){
         const {form:{name,age,gender},onFormChange} = this.props
