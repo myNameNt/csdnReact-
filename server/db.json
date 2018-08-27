@@ -1,9 +1,9 @@
 {
   "user": [
     {
-      "name": "ew",
-      "age": "21",
-      "gender": "male",
+      "name": "fd",
+      "age": "88",
+      "gender": "female",
       "id": 1
     },
     {
@@ -14,51 +14,33 @@
     },
     {
       "name": "trtg",
-      "age": "21",
-      "gender": "male",
-      "id": 3
-    },
-    {
-      "name": "trtg",
-      "age": "26",
-      "gender": "male",
-      "id": 4
-    },
-    {
-      "name": "trtg",
       "age": "26",
       "gender": "female",
       "id": 5
-    },
-    {
-      "name": "trtg",
-      "age": "26",
-      "gender": "female",
-      "id": 6
-    },
-    {
-      "name": "trtg",
-      "age": "26",
-      "gender": "female",
-      "id": 7
     },
     {
       "name": "cd",
       "age": "26",
       "gender": "female",
       "id": 8
+    },
+    {
+      "name": "萨达",
+      "age": "42",
+      "gender": "male",
+      "id": 9
     }
   ],
   "book": [
     {
       "id": 10000,
-      "name": "JavaScript�����ŵ���ͨ",
+      "name": "JavaScript",
       "price": 9990,
       "owner_id": 10000
     },
     {
       "id": 10001,
-      "name": "Java�����ŵ�����",
+      "name": "Java",
       "price": 1990,
       "owner_id": 10001
     }

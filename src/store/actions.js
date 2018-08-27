@@ -95,12 +95,12 @@ export function requestAddUser(name,age,gender,subreddit){
 export function requestEditUser(name, age, gender, id,subreddit) {
     return function(dispatch){
         axios({
-            url: `/${id}`,
+            url: `user/${id}`,
             method: 'put',
             data: {name, age, gender}
         }).then(res=>res.data)
         .then(res=>{
-            console.log('修改成功！')
+            console.log('修改成功！',res)
             dispatch(push('/userlist'))
         }).catch(err=>{
             alert('修改失败')

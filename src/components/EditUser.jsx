@@ -2,7 +2,6 @@ import React from 'react'
 import style from '../pages/mystyle.sass'
 import formProvider from './FormProvider'
 import FormItem from './FormItem'
-import HomeLayout from './HomeLayout'
 
 const formData = {
     name: {
@@ -49,38 +48,46 @@ class EditUser extends React.Component {
         super()
         this.onSubmit = this.onSubmit.bind(this)
     }
+    componentDidMount(){
+        const {onSetFormValues,editTarget} = this.props
+        if(editTarget){
+            onSetFormValues(editTarget)
+        }
+    }
     onSubmit(ev) {
         ev.preventDefault()
-        const { form: { name, age, gender}, formValid} = this.props
+        const { form: { name, age, gender}, formValid,editTarget} = this.props
         if (!formValid) {
             alert('信息填写错误')
             return
         }
+        if(editTarget){
+            const {id} = editTarget
+            this.props.onEditUser(name.value, age.value, gender.value,id, 'user')
+        } else{
+            this.props.addUser(name.value, age.value, gender.value, 'user')
+        }
         
-        this.props.addUser(name.value, age.value, gender.value, 'user')
     }
     render() {
         const { form: { name, age, gender }, onFormChange } = this.props
-        console.log(this.props,'list--as')
         return (
-            <HomeLayout className={style.useradd} title='添加用户' >
-                <form onSubmit={this.onSubmit} className={style.form}>
-                    <FormItem label="用户名：" valid={name.valid} error={name.error}>
-                        <input type="text" value={name.value || ''} onChange={(ev) => onFormChange('name', ev.target.value)} />
-                    </FormItem>
-                    <FormItem label="年龄：" valid={age.valid} error={age.error}>
-                        <input type="number" value={age.value || ''} onChange={(ev) => onFormChange('age', ev.target.value)} />
-                    </FormItem>
-                    <FormItem label="性别：" valid={gender.valid} error={gender.error}>
-                        <select onChange={(ev) => { onFormChange('gender', ev.target.value) }} value={gender.value}>
-                            <option value="">请选择</option>
-                            <option value="male">男</option>
-                            <option value="female">女</option>
-                        </select>
-                    </FormItem>
-                    <input type="submit" value="提交" />
-                </form>
-            </HomeLayout>
+            <form onSubmit={this.onSubmit} className={style.form}>
+                <FormItem label="用户名：" valid={name.valid} error={name.error}>
+                    <input type="text" value={name.value || ''} onChange={(ev) => onFormChange('name', ev.target.value)} />
+                </FormItem>
+                <FormItem label="年龄：" valid={age.valid} error={age.error}>
+                    <input type="number" value={age.value || ''} onChange={(ev) => onFormChange('age', ev.target.value)} />
+                </FormItem>
+                <FormItem label="性别：" valid={gender.valid} error={gender.error}>
+                    <select onChange={(ev) => { onFormChange('gender', ev.target.value) }} value={gender.value}>
+                        <option value="">请选择</option>
+                        <option value="male">男</option>
+                        <option value="female">女</option>
+                    </select>
+                </FormItem>
+                <input type="submit" value="提交" />
+            </form>
         )
     }
 }

@@ -5,6 +5,7 @@ import {
     Switch
 } from 'react-router-dom'
 import UserAdd from '../src/pages/UserAdd'
+import UserEdit from '../src/pages/UserEdit'
 import Home from '../src/pages/Home'
 import UserList from '../src/pages/UserList'
 class App extends React.Component{
@@ -19,6 +20,7 @@ class App extends React.Component{
                         <Route exact path='/' component={Home} />
                         <Route path="/useradd" component={UserAdd} />
                         <Route path="/userlist" component={UserList} />
+                        <Route path="/useredit" component={UserEdit} />
                     </Switch>
                 </div>
             </Router>

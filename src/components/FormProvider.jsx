@@ -26,8 +26,11 @@ function formProvider(fields){
                 const {form} = this.state
                 const newForm = {...form}
                 for(const field in newForm){
-                    if (typeof form.hasOwnProperty(field) !== 'undefined'){
-                        newForm[field] = {...newForm[field],value: values[field]}
+                    if (form.hasOwnProperty(field)){
+                        if(typeof values[field] !== 'undefined'){
+                            newForm[field] = {...newForm[field], value: values[field]}
+                        }
+                        
                     }
                     newForm[field].valid = true
                 }
@@ -66,7 +69,7 @@ function formProvider(fields){
                 return(
                     <Comp 
                     {...this.props} 
-                    form={form} 
+                    form={form}
                     formValid={formValid} 
                     onFormChange={this.handleValueChange}
                     onSetFormValues={this.setFormValues}

@@ -11,7 +11,7 @@ class List extends React.Component{
     }
     handleEdit(id){
         console.log(this.props,'list---')
-        this.props.history.push({ pathname: '/useradd',state:{id}})
+        this.props.history.push({ pathname: '/useredit',state:{id}})
         // this.props.handleEdit(id,'user')
     }
     handleDel(user){
