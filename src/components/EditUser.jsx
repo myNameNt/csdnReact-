@@ -1,5 +1,5 @@
 import React from 'react'
-import style from '../pages/mystyle.sass'
+import style from '../styles/mystyle.sass'
 import formProvider from './FormProvider'
 import FormItem from './FormItem'
 

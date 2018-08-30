@@ -1,6 +1,6 @@
 import React from 'react'
 import EditUser from '../components/EditUser'
-import HomeLayout from '../components/HomeLayout'
+import HomeLayout from '../HomeLayout/HomeLayout'
 import axios from '../util/request.js'
 
 import {connect} from 'react-redux'

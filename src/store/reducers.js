@@ -49,6 +49,11 @@ const initialData = {
                 id:666666
             }
         ]
+      },
+      book:{
+        isFetching: true,
+        didInvalidate: false,
+        items: []
       }
   }
 

@@ -11,6 +11,7 @@ import ThunkMiddleware from 'redux-thunk'
 import {createLogger} from 'redux-logger'
 
 const history = createHistory()
+window.history = history
 const middleware = routerMiddleware(history)
 const logger = createLogger()
 

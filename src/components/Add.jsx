@@ -2,7 +2,7 @@ import React from 'react'
 import style from '../pages/mystyle.sass'
 import formProvider from './FormProvider'
 import FormItem from './FormItem'
-import HomeLayout from './HomeLayout'
+import HomeLayout from '../HomeLayout/HomeLayout'
 
 const formData = {
     name: {

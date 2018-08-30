@@ -1,44 +1,40 @@
 import React from 'react'
 import HomeLayout from '../HomeLayout/HomeLayout'
-class List extends React.Component{
+class BookList extends React.Component{
     constructor(){
         super()
         this.handleEdit = this.handleEdit.bind(this)
         this.handleDel = this.handleDel.bind(this)
     }
     componentDidMount(){
-        this.props.getList('user')
+        this.props.getList('book')
     }
     handleEdit(id){
-        console.log(this.props,'list---')
-        this.props.history.push({ pathname: '/useredit',state:{id}})
-        // this.props.handleEdit(id,'user')
+        this.props.history.push({ pathname: '/bookedit',state:{id}})
     }
     handleDel(user){
-        this.props.requestHandleDel(user,'user')
+        this.props.requestHandleDel(user,'book')
     }
     onShowView(){
-        console.log(this.props,'---show')
-        let { items, isFetching} = this.props.userList
-
+        let { items, isFetching} = this.props.bookList
         if (isFetching){
             return (
                 <tr>
-                    <td>loading。。。。。。。</td>
+                    <td>loading。。。。。。</td>
                 </tr>
             )
         } else {
-            return items.map((item)=>
+            return items.map((book)=>
                 (
-                    <tr key={item.id}>
-                        <td>{item.id}</td>
-                        <td>{item.name}</td>
-                        <td>{item.gender}</td>
-                        <td>{item.age}</td>
+                    <tr key={book.id}>
+                        <td>{book.id}</td>
+                        <td>{book.name}</td>
+                        <td>&yen;{book.price / 100}</td>
+                        <td>{book.owner_id}</td>
                         <td>
-                            <a href="javascript:;" onClick={(ev) => { this.handleEdit(item.id)}} >编辑</a>
+                            <a href="javascript:void(0)" onClick={() => this.handleEdit(book)}>编辑</a>
                             &nbsp;
-                            <a href="javascript:;" onClick={(ev) => { this.handleDel(item)}}>删除</a>
+                            <a href="javascript:void(0)" onClick={() => this.handleDel(book)}>删除</a>
                         </td>
                     </tr>
                 )
@@ -67,4 +63,4 @@ class List extends React.Component{
     }
 }
 
-export default List
+export default BookList

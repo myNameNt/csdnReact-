@@ -6,7 +6,7 @@ class AutoComplete extends React.Component{
     constructor(){
         super()
         this.state = {
-            displayValue = '',
+            displayValue :'',
             activeItemIndex: -1
         }
     }
@@ -35,10 +35,10 @@ class AutoComplete extends React.Component{
     }
 }
 
-AutoComplete.proptypes = {
+AutoComplete.propTypes  = {
     value: PropTypes.string.isRequired,
     options: PropTypes.array.isRequired,
-    onValueChange: Proptypes.func.isRequired
+    onValueChange: PropTypes.func.isRequired
 }
 
 export default AutoComplete

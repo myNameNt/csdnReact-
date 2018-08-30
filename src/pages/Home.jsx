@@ -12,10 +12,10 @@ class Home extends React.Component{
                         <Link to="/userlist">查看用户信息</Link>
                     </li>
                     <li>
-                        <Link to="/detele">删除信息</Link>
+                        <Link to="/booklist">查看书籍列表</Link>
                     </li>
                     <li>
-                        <Link to="/examine">查看信息</Link>
+                        <Link to="/bookadd">添加书籍</Link>
                     </li>
                 </ul>
             </div>
