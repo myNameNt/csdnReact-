@@ -11,6 +11,7 @@ import UserList from '../src/pages/UserList'
 import BookAddPage from '../src/pages/BookAdd';
 import BookListPage from '../src/pages/BookList';
 import BookEditPage from '../src/pages/BookEdit';
+import Login from '../src/pages/Login'
 class App extends React.Component{
 
     render(){
@@ -28,6 +29,8 @@ class App extends React.Component{
                         <Route path="/bookedit" component={BookEditPage} />
                         <Route path="/booklist" component={BookListPage} />
                         <Route path="/bookadd" component={BookAddPage} />
+
+                        <Route path="/login" component={Login} />
                     </Switch>
                 </div>
             </Router>

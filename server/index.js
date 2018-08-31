@@ -8,7 +8,8 @@ server.use(jsonServer.bodyParser)
 server.use(middlewares)
 
 server.post('/login',function(req,res,next) {
-    res.headers('Access-Control-Exprose-Headers','access-token')
+    console.log(res,'---woshi')
+    res.header('Access-Control-Exprose-Headers','access-token')
     const {account,password} = req.body
     if(account === 'admin' && password === '123456'){
         res.header('access-token',Date.now())

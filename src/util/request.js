@@ -23,7 +23,7 @@ newAxios.interceptors.request.use(
 newAxios.interceptors.response.use(
     response=>{
         console.log(response,'回复的撒胡菊')
-        window.history.push('/')
+        //window.location.href = '/'
         return response
     },
     error=>{
@@ -31,7 +31,8 @@ newAxios.interceptors.response.use(
             console.log(error.response.status)
             switch(error.response.status){
                 case 401:
-                window.location.href = '/login'
+                window.location.href = '/login' // 可以解决问题
+               //window.history.pushState(null,'','/login')  没用 路由改变了但是视图没刷新
                     break
                 default:
                     return

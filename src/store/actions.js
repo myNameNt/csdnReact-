@@ -1,4 +1,4 @@
-import {ADD_USER,REQUEST_POSTS,RECEIVE_POSTS,SELECT_SUBREDDIT,INVALIDATE_SUBREDDIT,DEL_USER} from './actionTypes'
+import {ADD_USER,REQUEST_POSTS,RECEIVE_POSTS,SELECT_SUBREDDIT,INVALIDATE_SUBREDDIT,DEL_USER,GET_LOGIN,CLEAR_TOKEN} from './actionTypes'
 import {push} from 'react-router-redux' // 需要在action 里面做路由跳转 需要引入该 reducer ！！！
 import axios from '../util/request'
 
@@ -49,6 +49,41 @@ export function receivePosts(subreddit,json){
         subreddit,
         posts: json.data,
         receivedAt: Date.now()
+    }
+}
+
+//登录action
+export function changeToken(token){
+    return {
+        type: GET_LOGIN,
+        token,
+    }
+}
+
+export function clearToken(){
+    return {
+        type: CLEAR_TOKEN
+    }
+}
+// end--
+export function fetchLogin(account,password){
+    return function(dispatch){
+        axios({
+            method: 'post',
+            url:'/login',
+            data: {
+                account: account,
+                password: password
+            }
+        }).then(res=>{
+            window.location.href('/')
+            dispatch(changeToken(res))
+            alert('登录成功',res)
+
+        }).catch(err=>{
+            console.log(err,'err---')
+            dispatch(clearToken())
+        })
     }
 }
 

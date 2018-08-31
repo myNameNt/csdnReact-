@@ -1,4 +1,4 @@
-import {ADD_USER,DEL_USER,REQUEST_POSTS,RECEIVE_POSTS,SELECT_SUBREDDIT,INVALIDATE_SUBREDDIT} from './actionTypes'
+import {ADD_USER,DEL_USER,REQUEST_POSTS,RECEIVE_POSTS,SELECT_SUBREDDIT,INVALIDATE_SUBREDDIT,CHANGE_TOKEN,CLEAR_TOKEN} from './actionTypes'
 import {combineReducers} from 'redux'
 
 function selectsubreddit(state='user',action){
@@ -84,9 +84,22 @@ function postsBySubreddit(state=initialData,action){
     }
 }
 
+
+function login(state='',action){
+    switch(action.type){
+        case CHANGE_TOKEN:
+            return action.toekn
+        case CLEAR_TOKEN:
+            return state
+        default:
+            return state
+    }
+}
+
 const rootReducers = combineReducers({
     postsBySubreddit,
-    selectsubreddit
+    selectsubreddit,
+    token:login
 })
 
 export default rootReducers
