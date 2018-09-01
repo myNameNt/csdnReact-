@@ -22,7 +22,7 @@ newAxios.interceptors.request.use(
 
 newAxios.interceptors.response.use(
     response=>{
-        console.log(response,'回复的撒胡菊')
+        console.log(response,'回复')
         //window.location.href = '/'
         return response
     },
@@ -54,13 +54,13 @@ function request(method,url,body){
             method,
             data: body
         }).then(res=>{
+            console.log(res,'res--nt')
             if (res.status === 401) {
-                //history.push('/login');
                 return Promise.reject('Unauthorized.');
               } else {
                 const token = res.headers.get('access-token');
                 if (token) {
-                  sessionStorage.setItem('access_token', token);
+                  sessionStorage.setItem('access-token', token);
                 }
                 resolve(res)
             }

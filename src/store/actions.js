@@ -1,4 +1,4 @@
-import {ADD_USER,REQUEST_POSTS,RECEIVE_POSTS,SELECT_SUBREDDIT,INVALIDATE_SUBREDDIT,DEL_USER,GET_LOGIN,CLEAR_TOKEN} from './actionTypes'
+import {ADD_USER,REQUEST_POSTS,RECEIVE_POSTS,SELECT_SUBREDDIT,INVALIDATE_SUBREDDIT,DEL_USER,CHANGE_TOKEN,CLEAR_TOKEN} from './actionTypes'
 import {push} from 'react-router-redux' // 需要在action 里面做路由跳转 需要引入该 reducer ！！！
 import axios from '../util/request'
 
@@ -55,8 +55,8 @@ export function receivePosts(subreddit,json){
 //登录action
 export function changeToken(token){
     return {
-        type: GET_LOGIN,
-        token,
+        type: CHANGE_TOKEN,
+        token: Number(token),
     }
 }
 
@@ -72,16 +72,15 @@ export function fetchLogin(account,password){
             method: 'post',
             url:'/login',
             data: {
-                account: account,
-                password: password
+                account,
+                password
             }
         }).then(res=>{
-            window.location.href('/')
-            dispatch(changeToken(res))
-            alert('登录成功',res)
-
+            console.log(res,'---登录成功')
+            dispatch(changeToken(res.headers['access-token']))
+            sessionStorage.setItem('access_token',res.headers['access-token'])
+            window.location.href = '/'
         }).catch(err=>{
-            console.log(err,'err---')
             dispatch(clearToken())
         })
     }
@@ -95,7 +94,6 @@ export function fetchPosts(subreddit){
             method:'get',
             url:`/${subreddit}`,
         }).then(res=>{
-            console.log(res,'list---')
             dispatch(receivePosts(subreddit,res))
         })
         .catch(err=>{
@@ -113,7 +111,6 @@ export function requestAddUser(name,age,gender,subreddit){
         }).then((res)=>res.data)
         .then(res=>{
             if(res.id){
-                console.log('添加成功呢')
                 const {name,age,gender,id} = res
                 dispatch(addUser(name,age,gender,id,subreddit))
                 dispatch(push('/userlist'))

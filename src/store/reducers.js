@@ -85,10 +85,10 @@ function postsBySubreddit(state=initialData,action){
 }
 
 
-function login(state='',action){
+function login(state=0,action){
     switch(action.type){
         case CHANGE_TOKEN:
-            return action.toekn
+            return action.token
         case CLEAR_TOKEN:
             return state
         default:
